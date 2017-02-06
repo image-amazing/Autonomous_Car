@@ -62,48 +62,48 @@
 /*=========================================================================*/
 
 // Constants
-const int           LEFT_DIRECTION = 0;
-const int           RIGHT_DIRECTION = 1;
-const unsigned int  MAX_SPEED = 255;
-const unsigned int  MIN_SPEED = 0;
-const unsigned int  SPEED_STEP = 10;
-const unsigned int  FORWARD_SPEED = 150;
-const unsigned int  RESEARCH_SPEED = 200;
+const int                 LEFT_DIRECTION                     = 0;
+const int                 RIGHT_DIRECTION                    = 1;
+const unsigned int        MAX_SPEED                          = 255;
+const unsigned int        MIN_SPEED                          = 0;
+const unsigned int        SPEED_STEP                         = 10;
+const unsigned int        FORWARD_SPEED                      = 150;
+const unsigned int        RESEARCH_SPEED                     = 200;
 
 // Constants driving the obstacles recognition
-const int           MIN_OBSTACLE_DISTANCE_FOR_STOPPING = 50;
-const int           MIN_OBSTACLE_DISTANCE_FOR_STARTING = 60;
+const int                 MIN_OBSTACLE_DISTANCE_FOR_STOPPING = 50;
+const int                 MIN_OBSTACLE_DISTANCE_FOR_STARTING = 60;
 
-SoftwareSerial bluetoothControllerSS = SoftwareSerial(BLUEFRUIT_SWUART_TXD_PIN, BLUEFRUIT_SWUART_RXD_PIN);
+SoftwareSerial            bluetoothControllerSS              = SoftwareSerial(BLUEFRUIT_SWUART_TXD_PIN, BLUEFRUIT_SWUART_RXD_PIN);
 Adafruit_BluefruitLE_UART bluetoothController(bluetoothControllerSS, BLUEFRUIT_UART_MODE_PIN, BLUEFRUIT_UART_CTS_PIN, BLUEFRUIT_UART_RTS_PIN);
 
 // Variables related to the car controller
-Adafruit_MotorShield AFMS = Adafruit_MotorShield();
-Adafruit_DCMotor *motorFrontLeft = AFMS.getMotor(1);
-Adafruit_DCMotor *motorFrontRight = AFMS.getMotor(4);
-Adafruit_DCMotor *motorRearLeft = AFMS.getMotor(2);
-Adafruit_DCMotor *motorRearRight = AFMS.getMotor(3);
-AutoFourWheelDriveCar car = AutoFourWheelDriveCar(motorFrontLeft, motorFrontRight, motorRearLeft, motorRearRight, FORWARD_SPEED, 2300, 10.0);
-int carSpeed = FORWARD_SPEED;
+Adafruit_MotorShield      AFMS                               = Adafruit_MotorShield();
+Adafruit_DCMotor          *motorFrontLeft                    = AFMS.getMotor(1);
+Adafruit_DCMotor          *motorFrontRight                   = AFMS.getMotor(4);
+Adafruit_DCMotor          *motorRearLeft                     = AFMS.getMotor(2);
+Adafruit_DCMotor          *motorRearRight                    = AFMS.getMotor(3);
+AutoFourWheelDriveCar     car                                = AutoFourWheelDriveCar(motorFrontLeft, motorFrontRight, motorRearLeft, motorRearRight, FORWARD_SPEED, 2300, 10.0);
+int                       carSpeed                           = FORWARD_SPEED;
 
 // Connect via i2c, default address #0 (A0-A2 not jumpered)
-Adafruit_LiquidCrystal screen(0);
+Adafruit_LiquidCrystal    screen(0);
 
 // Calibration values
-const int           MIN_DEGREES = 10;
-const int           MAX_DEGREES = 170;
-int minFeedback;
-int maxFeedback;
+const int                 MIN_DEGREES                        = 10;
+const int                 MAX_DEGREES                        = 170;
+int                       minFeedback;
+int                       maxFeedback;
 
 // Variables related to the servo motor
-Servo servo;
+Servo                     servo;
 
-const int            AUTONOMOUS_MODE = 0;
-const int            REMOTE_CONTROLLED_MODE = 1;
-int controlMode = REMOTE_CONTROLLED_MODE;
+const int                 AUTONOMOUS_MODE                    = 0;
+const int                 REMOTE_CONTROLLED_MODE             = 1;
+int                       controlMode                        = REMOTE_CONTROLLED_MODE;
 
 // A small helper
-void error(const __FlashStringHelper*err) {
+void error(const __FlashStringHelper* err) {
   Serial.println(err);
   while (1);
 }
